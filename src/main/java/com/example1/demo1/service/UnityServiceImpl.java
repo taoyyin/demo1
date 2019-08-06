@@ -26,6 +26,7 @@ public class UnityServiceImpl implements UnityService{
     @Transactional
     public void save(UnityModel u) {
            unityRespository.save(u);
+
     }
 
     @Override
@@ -41,10 +42,13 @@ public class UnityServiceImpl implements UnityService{
 
     @Override
     @Transactional
-    public void find(int id) {
-      unityRespository.findById(id);
+    public Optional<UnityModel> find(int id) {
+      Optional<UnityModel>  unities = unityRespository.findById(id);
+      return unities;
 
     }
+
+
 
     @Override
     @Transactional

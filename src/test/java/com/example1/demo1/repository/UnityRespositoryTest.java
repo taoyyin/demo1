@@ -1,11 +1,10 @@
-package com.example1.demo1.respositorytest;
+package com.example1.demo1.repository;
 
 import com.example1.demo1.model.UnityModel;
 import com.example1.demo1.respository.UnityRespository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -69,7 +68,7 @@ public class UnityRespositoryTest {
         unityModel1.setContent("看故事书");
         UnityModel u1 = unityRespository.save(unityModel1);
 
-        unityRespository.deleteById(6);
+        unityRespository.deleteById(7);
         Iterable i =unityRespository.findAll();
         System.out .println(i);
     }

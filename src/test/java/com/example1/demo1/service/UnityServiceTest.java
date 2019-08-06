@@ -1,8 +1,7 @@
-package com.example1.demo1.servicetest;
+package com.example1.demo1.service;
 
 import com.example1.demo1.model.UnityModel;
 import com.example1.demo1.respository.UnityRespository;
-import com.example1.demo1.service.UnityServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,19 +24,19 @@ public class UnityServiceTest {
     private UnityServiceImpl unityService;
     @MockBean
     UnityRespository unityRespository;
+
     @Before
     public void setUp(){
         UnityModel u = new UnityModel();
         u.setId(1);
         u.setTitle("运动");
         u.setContent("打篮球");
-        unityService.save(u);
+       // unityService.save(u);
 
         UnityModel u2 = new UnityModel();
         u2.setId(2);
         u2.setTitle("娱乐");
         u2.setContent("打游戏");
-
 
         List<UnityModel> unityModelList = Arrays.asList(u,u2);
         Mockito.when(unityRespository.findById(u.getId())).thenReturn(Optional.of(u));
@@ -48,20 +47,20 @@ public class UnityServiceTest {
 
     }
     @Test
-    public void  saveTest(){
+    public void  getAllTest(){
         UnityModel u = new UnityModel();
         u.setId(1);
         u.setTitle("运动");
         u.setContent("打篮球");
-        unityService.save(u);
-        System.out.println(u);
+       // unityService.save(u);
+
 
         UnityModel u2 = new UnityModel();
         u2.setId(2);
         u2.setTitle("娱乐");
         u2.setContent("打游戏");
-        unityService.save(u2);
-        System.out.println(u2);
+       // unityService.save(u2);
+       // System.out.println(u2);
 
         Iterable<UnityModel> allUnity = unityService.getAll();
         assertThat(allUnity).hasSize(2).extracting(UnityModel::getContent).
@@ -74,26 +73,55 @@ public class UnityServiceTest {
     }
 
     @Test
-    public void deleteTest(){
+    public void findByIdTest(){
+        UnityModel unityModel = this.unityService.find(1).get();
+        assertThat(unityModel).extracting("content").contains("打篮球");
+    }
+
+    @Test
+    public void saveTest(){
+        UnityModel u2 = new UnityModel();
+        u2.setId(2);
+        u2.setTitle("运动");
+        u2.setContent("打游戏");
+        this.unityService.save(u2);
+
+        UnityModel unityModel = this.unityService.find(2).get();
+        assertThat(unityModel).extracting("content").contains("打游戏");
+    }
+
+    @Test
+    public void updateTest(){
+        UnityModel unityModel = this.unityService.find(1).get();
+       unityService.update(unityModel);
+       unityModel.setContent("打排球");
+       assertThat(unityModel).extracting("content").contains("打排球");
+
+    }
+
+    @Test
+    public void deleteTest() {
+
         UnityModel u = new UnityModel();
         u.setId(1);
         u.setTitle("运动");
         u.setContent("打篮球");
-        unityService.save(u);
-        System.out.println(u);
+        // unityService.save(u);
+
 
         UnityModel u2 = new UnityModel();
         u2.setId(2);
         u2.setTitle("娱乐");
         u2.setContent("打游戏");
-        unityService.save(u2);
+        // unityService.save(u2);
+        unityService.delete(2);
+        Iterable<UnityModel> unityModels = unityService.getAll();
+        System.out.println(unityModels);
 
-
-        //unityService.delete(1);
-        Iterable<UnityModel> i = unityService.getAll();
-        System.out.println(i);
 
     }
+
+
 
 
 
