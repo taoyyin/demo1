@@ -93,7 +93,7 @@ public class UnityServiceTest {
     @Test
     public void updateTest(){
         UnityModel unityModel = this.unityService.find(1).get();
-       unityService.update(unityModel);
+       unityService.update( unityModel,1);
        unityModel.setContent("打排球");
        assertThat(unityModel).extracting("content").contains("打排球");
 

@@ -15,33 +15,36 @@ public class UnityServiceImpl implements UnityService{
    ;
 
     @Override
-    @Transactional
+
     public void delete(int id) {
         unityRespository.deleteById(id);
+
+
     }
 
 
 
     @Override
-    @Transactional
-    public void save(UnityModel u) {
-           unityRespository.save(u);
+
+    public UnityModel save(UnityModel u) {
+          return  unityRespository.save(u);
 
     }
 
     @Override
-    @Transactional
-    public void update(UnityModel u) {
+
+    public UnityModel update(UnityModel u,int id) {
            UnityModel unityModel  = unityRespository.findById(u.getId()).get();
            unityModel.setTitle(u.getTitle());
            unityModel.setContent(u.getContent());
+           return unityRespository.save(unityModel);
 
 
 
     }
 
     @Override
-    @Transactional
+
     public Optional<UnityModel> find(int id) {
       Optional<UnityModel>  unities = unityRespository.findById(id);
       return unities;

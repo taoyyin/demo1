@@ -13,7 +13,7 @@ public class UnityModel {
     String content;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    int id;
+    Integer id;
 
     public void setId(int id) {
         this.id = id;
@@ -28,7 +28,7 @@ public class UnityModel {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

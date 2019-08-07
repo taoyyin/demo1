@@ -68,7 +68,7 @@ public class UnityRespositoryTest {
         unityModel1.setContent("看故事书");
         UnityModel u1 = unityRespository.save(unityModel1);
 
-        unityRespository.deleteById(7);
+        unityRespository.deleteById(8);
         Iterable i =unityRespository.findAll();
         System.out .println(i);
     }

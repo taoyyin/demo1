@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UnityService {
-    void delete(int id);
-    void  save(UnityModel u);
-    void update(UnityModel u);
+    void  delete(int id);
+    UnityModel save(UnityModel u);
+    UnityModel update(UnityModel u,int id);
     Optional<UnityModel> find(int id);
     Iterable<UnityModel> getAll();
 
